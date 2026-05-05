@@ -1,0 +1,5 @@
+error_type,include_votes,exclude_votes,primary_include_votes,primary_exclude_votes,escalation_include_votes,escalation_exclude_votes,mean_include_probability,mean_signed_confidence
+false_negative,0.0,6.0,0.0,3.0,0.0,3.0,0.06666666666666667,-0.9333333333333332
+false_positive,4.0,1.25,2.25,0.75,1.75,0.5,0.7675,0.5591666666666666
+true_negative,0.1111111111111111,5.888888888888889,0.1111111111111111,2.888888888888889,0.0,3.0,0.07453703703703704,-0.9069444444444444
+true_positive,3.9375,0.5625,2.5,0.5,1.4375,0.0625,0.8688541666666666,0.7751041666666666

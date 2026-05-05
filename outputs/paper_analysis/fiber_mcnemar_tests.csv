@@ -1,0 +1,11 @@
+model_a,model_b,a_correct_b_wrong,a_wrong_b_correct,discordant_total,exact_mcnemar_p_value,stage
+final_pipeline,keyword_sensitive,36,40,76,0.7310088822226051,l1
+final_pipeline,keyword_strict,24,43,67,0.027119992403126347,l1
+final_pipeline,always_exclude,42,49,91,0.529602095476245,l1
+final_pipeline,primary_majority_include,18,27,45,0.23269319190831084,l1
+final_pipeline,primary_unanimous_include,14,45,59,6.530630444913366e-05,l1
+final_pipeline,keyword_sensitive,18,1,19,7.62939453125e-05,l2
+final_pipeline,keyword_strict,15,4,19,0.0192108154296875,l2
+final_pipeline,always_exclude,16,4,20,0.01181793212890625,l2
+final_pipeline,primary_majority_include,1,0,1,1.0,l2
+final_pipeline,primary_unanimous_include,8,3,11,0.2265625,l2

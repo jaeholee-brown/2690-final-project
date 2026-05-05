@@ -1,0 +1,7 @@
+outcome,published_effect,published_k,contributing_studies,contributor_statuses,changed_under_llm,interpretation
+Mean diarrhea score (Hart and Dobb scale),"MD -2.78 (-4.10, -1.47)",4,Chittawatanarat 2010; Emery 1997; Spapen 2001; Yagmurdur 2016,"TP, TP, TP, TP",No,Published pooled estimate is unchanged because all contributing studies are true positives.
+Diarrhea incidence (Hart and Dobb definitions),"RR 0.68 (0.45, 1.02)",7,Chittawatanarat 2010; Dobb 1990; Emery 1997; Schultz 2000 (split-arm); Spapen 2001; Yagmurdur 2016,TP only,No,Published pooled estimate is unchanged because all contributing studies are true positives.
+Diarrhea incidence (other scales),"RR 0.42 (0.20, 0.89)",3,Belknap 1997; Xi 2017; Tuncay 2018,"FN, TP, TP",Yes,Published pooled estimate changes because the sole L2 false negative contributes data.
+Severe diarrhea,"RR 0.52 (0.21, 1.33)",3,Dobb 1990; Spapen 2001; Yagmurdur 2016,"TP, TP, TP",No,Published pooled estimate is unchanged because all contributing studies are true positives.
+Any GI complications,"RR 0.61 (0.47, 0.79)",3,Yagmurdur 2016; Rushdi 2004; Xi 2017,"TP, TP, TP",No,Published pooled estimate is unchanged because all contributing studies are true positives.
+ICU mortality,"RR 0.91 (0.65, 1.27)",6,Jain 2004; Chittawatanarat 2010; Spapen 2001; Caparros 2001; Xi 2017; Spindler-Vesel 2007,TP only,No,Published pooled estimate is unchanged because all contributing studies are true positives.

@@ -1,0 +1,4 @@
+baseline_name,true_positive,false_positive,true_negative,false_negative,sensitivity,specificity,balanced_accuracy,precision,n,stage
+always_exclude,0,0,364,44,0.0,1.0,0.5,,408,l1
+keyword_sensitive,40,43,321,4,0.9090909090909091,0.8818681318681318,0.8954795204795205,0.4819277108433735,408,l1
+keyword_strict,25,13,351,19,0.5681818181818182,0.9642857142857143,0.7662337662337663,0.6578947368421053,408,l1

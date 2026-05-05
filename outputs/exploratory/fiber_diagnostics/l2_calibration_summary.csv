@@ -1,0 +1,2 @@
+stage,n,bins,auc,brier_score,ece,hosmer_lemeshow_stat,hosmer_lemeshow_df,hosmer_lemeshow_p
+l2,39,5,0.9304812834224597,0.10362165242165243,0.06401709401709399,1.9459181324428132,3,0.5837071244569101

@@ -1,0 +1,144 @@
+---
+title: "Fiber Meta-Analysis Audit"
+output: html_document
+---
+
+```{r setup, message=FALSE, warning=FALSE}
+root_dir <- normalizePath("..", winslash = "/")
+knitr::opts_knit$set(root.dir = root_dir)
+library(dplyr)
+library(readr)
+library(tidyr)
+library(knitr)
+library(metafor)
+
+dir.create(file.path(root_dir, "outputs/paper_analysis/meta_analysis_audit"), recursive = TRUE, showWarnings = FALSE)
+```
+
+## Purpose
+
+This notebook audits which published pooled outcomes from Cara et al. (2021) are actually altered by the L2 screening errors. The key distinction is that the review included 19 studies overall, but the paper did not pool all 19 in a single omnibus meta-analysis. Instead, it reported multiple outcome-specific syntheses with different contributing study sets.
+
+The audit uses two inputs:
+
+1. The published outcome-to-study mapping recovered from the local paper archive.
+2. The L2 benchmark labels and final pipeline decisions from the project outputs.
+
+## L2 study status crosswalk
+
+```{r}
+pred <- read_csv(file.path(root_dir, "outputs/fiber_l2_full_20260504_120923/predictions.csv"), show_col_types = FALSE)
+val <- read_csv(file.path(root_dir, "data/processed/l2/cara_2021_fiber.csv"), show_col_types = FALSE)
+
+l2_status <- pred %>%
+  inner_join(val, by = c("record_id" = "record_index")) %>%
+  mutate(
+    llm_status = case_when(
+      gold_final_include & final_decision == "include" ~ "TP",
+      gold_final_include & final_decision != "include" ~ "FN",
+      !gold_final_include & final_decision == "include" ~ "FP",
+      TRUE ~ "TN"
+    )
+  ) %>%
+  transmute(
+    record_id,
+    pdf_reference_title,
+    llm_status
+  )
+
+kable(l2_status %>% filter(llm_status %in% c("TP", "FN", "FP")))
+```
+
+## Published pooled outcomes
+
+The table below summarizes the main published pooled outcomes that are relevant to the manuscript. For each pooled outcome, the audit asks whether the contributing study set changes when the human-selected full-text set is replaced by the LLM-selected full-text set.
+
+```{r}
+audit <- tibble::tribble(
+  ~outcome, ~published_effect, ~published_k, ~contributing_studies, ~contributor_statuses, ~changed_under_llm,
+  "Mean diarrhea score (Hart and Dobb scale)", "MD -2.78 (-4.10, -1.47)", 4L,
+  "Chittawatanarat 2010; Emery 1997; Spapen 2001; Yagmurdur 2016", "TP, TP, TP, TP", "No",
+  "Diarrhea incidence (Hart and Dobb definitions)", "RR 0.68 (0.45, 1.02)", 7L,
+  "Chittawatanarat 2010; Dobb 1990; Emery 1997; Schultz 2000 (split-arm); Spapen 2001; Yagmurdur 2016", "TP only", "No",
+  "Diarrhea incidence (other scales)", "RR 0.42 (0.20, 0.89)", 3L,
+  "Belknap 1997; Xi 2017; Tuncay 2018", "FN, TP, TP", "Yes",
+  "Severe diarrhea", "RR 0.52 (0.21, 1.33)", 3L,
+  "Dobb 1990; Spapen 2001; Yagmurdur 2016", "TP, TP, TP", "No",
+  "Any GI complications", "RR 0.61 (0.47, 0.79)", 3L,
+  "Yagmurdur 2016; Rushdi 2004; Xi 2017", "TP, TP, TP", "No",
+  "ICU mortality", "RR 0.91 (0.65, 1.27)", 6L,
+  "Jain 2004; Chittawatanarat 2010; Spapen 2001; Caparros 2001; Xi 2017; Spindler-Vesel 2007", "TP only", "No"
+) %>%
+  mutate(
+    interpretation = if_else(
+      changed_under_llm == "Yes",
+      "Published pooled estimate changes because the sole L2 false negative contributes data.",
+      "Published pooled estimate is unchanged because all contributing studies are true positives."
+    )
+  )
+
+write_csv(audit, file.path(root_dir, "outputs/paper_analysis/meta_analysis_audit/published_syntheses_audit.csv"))
+
+kable(audit)
+```
+
+## Reproduction of the one changed published synthesis
+
+Cara et al.'s non-Hart-and-Dobb diarrhea-incidence synthesis is the only published pooled outcome changed by the L2 screen. The published review pooled Belknap (1997), Xi (2017), and Tuncay (2018). Under the LLM-selected set, Belknap is missing, so the practical comparison is the published three-study subgroup versus the same subgroup without Belknap.
+
+```{r}
+studies <- tibble::tribble(
+  ~study, ~ai, ~bi, ~ci, ~di,
+  "Belknap 1997", 8L, 37L - 8L, 7L, 23L - 7L,
+  "Xi 2017", 7L, 62L - 7L, 16L, 63L - 16L,
+  "Tuncay 2018", 2L, 23L - 2L, 13L, 23L - 13L
+) %>%
+  mutate(
+    measure_set = c("Human", "Human", "Human"),
+    llm_included = c(FALSE, TRUE, TRUE)
+  )
+
+fit_meta <- function(dat) {
+  esc <- escalc(measure = "RR", ai = ai, bi = bi, ci = ci, di = di, data = dat)
+  fit <- rma(yi, vi, method = "DL", data = esc)
+  tibble(
+    k = fit$k,
+    pooled_rr = exp(fit$b[[1]]),
+    ci_lb = exp(fit$ci.lb),
+    ci_ub = exp(fit$ci.ub),
+    i2 = fit$I2,
+    tau2 = fit$tau2,
+    pval = fit$pval
+  )
+}
+
+fit_meta_method <- function(dat, method_label, method_code) {
+  esc <- escalc(measure = "RR", ai = ai, bi = bi, ci = ci, di = di, data = dat)
+  fit <- rma(yi, vi, method = method_code, data = esc)
+  tibble(
+    estimator = method_label,
+    k = fit$k,
+    pooled_rr = exp(fit$b[[1]]),
+    ci_lb = exp(fit$ci.lb),
+    ci_ub = exp(fit$ci.ub),
+    i2 = if (method_code == "FE") NA_real_ else fit$I2,
+    tau2 = fit$tau2,
+    pval = fit$pval
+  )
+}
+
+meta_summary <- bind_rows(
+  fit_meta(studies) %>% mutate(set = "Human", estimator = "DL random-effects"),
+  fit_meta(filter(studies, llm_included)) %>% mutate(set = "LLM", estimator = "DL random-effects"),
+  fit_meta_method(filter(studies, llm_included), "Fixed-effect", "FE") %>% mutate(set = "LLM")
+) %>%
+  select(set, estimator, everything())
+
+write_csv(meta_summary, file.path(root_dir, "outputs/paper_analysis/meta_analysis_audit/other_scales_meta_summary.csv"))
+
+kable(meta_summary, digits = 3)
+```
+
+## Takeaway
+
+For this review, the downstream effect of screening error is narrower than a generic "one missed full text" narrative would imply. The pipeline's one L2 false negative does not alter the larger headline pooled outcomes in the paper, because those outcomes draw only on studies that remained true positives under the LLM screen. The only published pooled estimate that changes is the smaller three-study non-Hart-and-Dobb diarrhea-incidence subgroup, where omission of Belknap (1997) makes the pooled effect appear stronger and less precise.

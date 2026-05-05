@@ -1,0 +1,21 @@
+## Table A1. Representative Errors Where the LLM Pipeline Was Clearly Wrong
+
+| Stage | Record | Title | Human | Model | Vote Split | Mean Include Prob. | Why This Case Matters |
+|---|---:|---|---|---|---|---:|---|
+| L1 | 58 | The effects of synbiotics on morbidity and mortality in newborns with cyanotic congenital heart disease: A prospective randomized controlled trial | Title_abstract_exclude | include | 4 include / 2 exclude | 0.650 | Neonatal/NICU population was outside the intended adult critical-care target. |
+| L1 | 59 | The propre-save study: effects of probiotics and prebiotics alone or combined on necrotizing enterocolitis in very low birth weight infants | Title_abstract_exclude | include | 4 include / 2 exclude | 0.647 | Very-low-birth-weight infant study was treated as on-target ICU evidence. |
+| L1 | 61 | Tolerance, safety, and effect on the faecal microbiota of an enteral formula supplemented with pre- and probiotics in critically ill children | Title_abstract_exclude | include | 5 include / 1 exclude | 0.722 | Pediatric ICU synbiotic trial was advanced despite the review targeting adult critical-care patients. |
+| L1 | 167 | Soy-polysaccharide fiber: Effect on diarrhea in tube-fed, head-injured patients | Title_abstract_exclude | include | 5 include / 1 exclude | 0.673 | Head-injured tube-fed patients were treated as ICU/critical-care despite no explicit ICU signal. |
+| L1 | 179 | Fiber-fortified feedings in immobile patients | Title_abstract_exclude | include | 4 include / 2 exclude | 0.567 | Immobile tube-fed patients were advanced on topic similarity alone, not population match. |
+| L1 | 214 | Reduction in diarrhea incidence by soluble fiber in patients receiving total or supplemental enteral nutrition | Title_abstract_exclude | include | 5 include / 1 exclude | 0.647 | Postoperative enteral-nutrition trial lacked the ICU/critical-ill population required by the review. |
+
+## Table A2. Representative Errors That Were Arguably Reasonable Under Ambiguous Criteria
+
+| Stage | Record | Title | Human | Model | Vote Split | Mean Include Prob. | Why This Case Matters |
+|---|---:|---|---|---|---|---:|---|
+| L1 | 23 | An overview of diarrhea in ICU patients receiving enteral nutrition | Full_text_exclude | exclude | 0 include / 6 exclude | 0.070 | Review-style ICU diarrhea paper had no explicit fiber intervention, so exclusion was defensible. |
+| L1 | 25 | Diarrhea in intensive care: Diagnosis and treatment | Full_text_exclude | exclude | 1 include / 5 exclude | 0.217 | Another generic ICU diarrhea review that humans sent to full text but models saw as clearly out of scope. |
+| L2 | 17 | The effects of psyllium hydrophilic mucilloid on diarrhea in enterally fed patients | Full_text_include | exclude | 0 include / 6 exclude | 0.067 | The full text described a mixed ICU and medical-surgical sample, so strict exclusion was understandable. |
+| L2 | 20 | Benefits of a synbiotic formula (Synbiotic 2000 Forte) in critically Ill trauma patients: early results of a randomized controlled trial | Full_text_exclude | include | 5 include / 1 exclude | 0.793 | Comparator eligibility in the synbiotic trauma trial appears genuinely contestable from the criteria wording. |
+| L2 | 22 | Additional oligofructose/inulin does not increase faecal bifidobacteria in critically ill patients receiving enteral nutrition: a randomised controlled trial | Full_text_exclude | include | 4 include / 2 exclude | 0.665 | The placebo was non-fiber, but the formula context made the comparator logic debatable. |
+| L2 | 28 | Effect of a fecal bulking agent on diarrhea during enteral feeding in the critically ill | Full_text_exclude | include | 4 include / 2 exclude | 0.635 | The comparator looked fiber-based to one reading and non-fiber enough to another. |

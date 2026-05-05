@@ -1,0 +1,114 @@
+TABLE S1. Eligibility criteria for studies considered for review
+
+IMPORTANT STAGE RULE
+  At L1 (title/abstract review), do not exclude solely because a record appears to be a
+  narrative review, commentary, conference proceeding, non-English publication, mixed
+  ICU/non-ICU population, or an RCT with a fiber-based placebo/comparator if the title
+  and abstract otherwise appear relevant. Forward such records to L2 for final
+  determination whenever the population and fiber-related enteral exposure appear
+  potentially on target.
+
+CATEGORY
+  Study design
+    Inclusion criteria:
+      Any clinical study or case study:
+      - Randomized controlled trials
+      - Non-randomized controlled trials including quasi-experimental and
+        controlled before-and-after studies
+      - Prospective cohort studies
+      - Retrospective cohort studies
+      - Case-controlled studies
+      - Nested case-controlled studies
+      - Case reports/case studies
+      - Mendelian randomization studies
+      - Uncontrolled trials
+      - Cross-sectional studies
+    Exclusion criteria:
+      - Narrative reviews
+      - Letters to the editor (as long as they do not include a case study)
+      - Protocols
+      - Background reading
+      - Meta-analyses
+      - Systematic reviews
+
+  Study duration
+    Inclusion criteria:
+      - No restriction
+    Exclusion criteria:
+      - NA
+
+  Sample size
+    Inclusion criteria:
+      - No restriction
+    Exclusion criteria:
+      - NA
+
+  Intervention/exposure
+    Inclusion criteria:
+      - Any dietary fiber including prebiotics, probiotics, synbiotics, and
+        multi-fiber formulas
+      - Enteral feeding (oral, sublingual, rectal)
+    Exclusion criteria:
+      - Interventions other than dietary fiber
+      - Parenteral nutrition
+
+  Comparator
+    Inclusion criteria:
+      - Comparisons across different dietary fibers
+      - Comparisons of dietary fibers to other foods/beverages
+      - Comparison(s) to a non-fiber placebo
+      - No comparator
+    Exclusion criteria:
+      - For RCTs, exclude if the placebo is fiber-based (i.e., inulin)
+
+  Outcomes
+    Inclusion criteria:
+      - Any health-related outcomes defined by the original research
+    Exclusion criteria:
+      - Other outcomes
+
+  Date of publication
+    Inclusion criteria:
+      - No restriction
+    Exclusion criteria:
+      - NA
+
+  Publication status
+    Inclusion criteria:
+      - Articles published in peer-reviewed journals
+    Exclusion criteria:
+      - Articles not published in peer-reviewed journals, including unpublished
+        data, manuscript reports, abstracts, pre-prints, and conference
+        proceedings
+
+  Language of publication
+    Inclusion criteria:
+      - English
+    Exclusion criteria:
+      - Languages other than English
+
+  Country
+    Inclusion criteria:
+      - No restriction
+    Exclusion criteria:
+      - NA
+
+  Study participants
+    Inclusion criteria:
+      - Any human subjects
+    Exclusion criteria:
+      - Non-human subjects
+      - In vitro
+
+  Age of study participants
+    Inclusion criteria:
+      - No age restriction at this time
+    Exclusion criteria:
+      - N/A
+
+  Health status of participants
+    Inclusion criteria:
+      - 100% ICU patients or critically ill patients
+      - No disease restriction at this time
+    Exclusion criteria:
+      - Non-ICU patients or noncritically ill patients

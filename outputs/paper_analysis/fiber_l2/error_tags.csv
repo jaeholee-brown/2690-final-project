@@ -1,0 +1,6 @@
+record_index,error_type,theme,manual_note
+17,false_negative,strict_100_percent_icu_interpretation,Pipeline excluded because the full text described a mixed ICU and medical-surgical population.
+20,false_positive,comparator_rule_disagreement,"Humans excluded, but pipeline treated comparator logic as acceptable despite fiber-placebo ambiguity."
+22,false_positive,comparator_rule_disagreement,"Humans excluded, but pipeline treated comparator logic as acceptable despite fiber-placebo ambiguity."
+28,false_positive,comparator_rule_disagreement,"Humans excluded, but pipeline treated comparator logic as acceptable despite fiber-placebo ambiguity."
+29,false_positive,broad_fiber_eligibility_interpretation,Pipeline judged beta-glucan trauma-ICU RCT as fully eligible while human decision was exclude.
