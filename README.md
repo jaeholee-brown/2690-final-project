@@ -1,8 +1,6 @@
 # Submission Code
 
-This directory is a trimmed, self-contained copy of the project code intended for course submission.
-
-The original repository is unchanged. This folder is a curated bundle containing:
+This folder is a curated bundle containing:
 
 - `python_pipeline/`
   - Python code for the screening pipeline and the paper analysis.
@@ -186,13 +184,3 @@ You can then point `paper_analysis.py` at the new `predictions.csv`.
   3. `paper_analysis.py`
   4. `paper_significance.py`
   5. `r_analysis/fiber_meta_analysis_audit.Rmd`
-
-## What was intentionally excluded
-
-This bundle excludes repo material that is not needed to understand or rerun the Fiber manuscript workflow, for example:
-
-- manuscript source files
-- unrelated datasets
-- unrelated exploratory files
-- editor settings
-- Python cache files
